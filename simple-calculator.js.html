@@ -197,11 +197,29 @@
         })
 
         bgn.addEventListener("change", (e) => {
+            currentBgnEl.style.cursor = "pointer"
+            currentBgnEl.dataset.source = `${e.target.value}лв.`
+            currentBgnEl.dataset.result = `${round(e.target.value / currency_rate)}€`
+            currentBgnEl.addEventListener("click", (e)=>{
+                display.classList.remove("eu")
+                display.classList.add('bg')
+                source.innerText = e.target.dataset.source
+                result.innerText = e.target.dataset.result
+            })
             currentBgnEl = document.createElement("div")
             resultBgn.insertBefore(currentBgnEl, resultBgn.firstChild)
         })
 
         eur.addEventListener("change", (e) => {
+            currentEurEl.style.cursor = "pointer"
+            currentEurEl.dataset.source = `${e.target.value}€`
+            currentEurEl.dataset.result = `${round(e.target.value * currency_rate)}лв.`
+            currentEurEl.addEventListener("click", (e)=>{
+                display.classList.remove("bg")
+                display.classList.add('eu')
+                source.innerText = e.target.dataset.source
+                result.innerText = e.target.dataset.result
+            })
             currentEurEl = document.createElement("div")
             resultEur.insertBefore(currentEurEl, resultEur.firstChild)
         })
