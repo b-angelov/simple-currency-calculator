@@ -47,9 +47,11 @@
         [id^="result"]{
             border: solid 1px red;
             min-height: 70vh;
+            max-height: 90vh;
             border-radius: 0.45em 0.55em 0.2em 0.3em;
             box-shadow: 0.2em 0.3em 0.1em #0d301f;
             background-color: rgba(241, 18, 18, 0.11);
+            overflow-y: scroll;
         }
 
         form > div:last-child > div:last-child{
@@ -142,7 +144,7 @@
             <div>
                 <label for="bgn">Сума в левове</label>
                 <input type="number" placeholder="лева" id="bgn"></input>
-                <div id="result-bgn"></div>
+                <div id="result-bgn" class="bg"></div>
             </div>
             <div id="display">
                 <div class="source"></div>
@@ -152,7 +154,7 @@
             <div>
                 <label for="eur">Сума в евро</label>
                 <input type="number" placeholder="евро" id="eur"></input>
-                <div id="result-eur"></div>
+                <div id="result-eur" class="eu"></div>
             </div>
         </form>
 
@@ -222,6 +224,18 @@
             })
             currentEurEl = document.createElement("div")
             resultEur.insertBefore(currentEurEl, resultEur.firstChild)
+        })
+
+        eur.addEventListener("keyup", (e)=>{
+            if (e.key === "Enter") {
+                eur.value=""
+            }
+        })
+
+        bgn.addEventListener("keyup", (e)=>{
+            if (e.key === "Enter") {
+                bgn.value=""
+            }
         })
 
 
