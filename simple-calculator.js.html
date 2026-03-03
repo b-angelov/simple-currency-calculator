@@ -17,6 +17,36 @@
             background-color: rgba(174, 234, 178, 0.11);
         }
 
+        .logo{
+            left: 37vw;
+            top: 8vh;
+            font-size: 8rem;
+            position: absolute;
+            width: 10vw;
+            min-width: 10vw;
+            height:5vh;
+            text-align:center;
+        }
+
+        .logo > *{
+            position: inherit;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+         }
+
+        .logo div{
+            padding-left: 11vw;
+        }
+
+        time{
+            position: absolute;
+            top: 10vh;
+            font-size: 7rem;
+            color: rgba(232, 70, 48, 0.5);
+        }
+
+
         #display{
             font-size: 2em;
             border-radius: 2em;
@@ -109,7 +139,7 @@
             text-align: center;
             border: #abc solid 2px;
             border-radius: 0.1em 0.3em 0.4em 1em;
-            box-shadow: 0.1em 0.15em 0.4em #0d301f;
+            box-shadow: -0.1em 0.15em 0.4em #0d301f;
         }
 
         form > div:last-child  input{
@@ -132,7 +162,23 @@
 
         .result{
             color: #08a40a;
+        }
 
+        div.settings{
+            position: absolute;
+            display:flex;
+            align-items: center;
+            align-content: center;
+            flex-direction: column;
+            left: 42vw;
+            bottom: 2vh;
+            max-width: 20vw;
+
+        }
+
+        div.settings input{
+            max-width: 8vw;
+            border-radius: 0.2em 0.2em 1.8em 1.8em;
         }
 
 
@@ -146,6 +192,8 @@
                 <input type="number" placeholder="лева" id="bgn"></input>
                 <div id="result-bgn" class="bg"></div>
             </div>
+            <time></time>
+            <figure class="logo"></figure>
             <div id="display">
                 <div class="source"></div>
                 <hr>
@@ -158,19 +206,63 @@
             </div>
         </form>
 
+        <div class="settings">
+            <label for="step">Стъпка за автоматично увеличение</label>
+            <input type="number" name="step" id="step" value="1"/>
+        </div>
+
 
     </main>
 
     <script>
+        const LOGO = null
+        const INCREMENT_STEP = 1
+
         const eur = document.querySelector("#eur")
         const bgn = document.querySelector("#bgn")
+        eur.step = INCREMENT_STEP
+        bgn.step = INCREMENT_STEP
         const source = document.querySelector(".source")
         const result = document.querySelector(".result")
         const display = document.querySelector("#display")
+        const step = document.querySelector("#step")
+        const time_element = document.querySelector("time")
         const [resultBgn,resultEur] = document.querySelectorAll("[id^='result']")
         console.log(document.querySelectorAll("[id^='result']"))
         console.log(resultBgn,resultEur)
         const currency_rate = 1.95583
+
+        const figure = document.querySelector(".logo")
+        let logo;
+        if(LOGO){
+            logo = document.createElement("img")
+            logo.setAttribute("src", LOGO)
+            logo.setAttribute("alt", "logo")
+        }else{
+            logo = document.createElement("div")
+            logo.innerText += "⌨️"
+        }
+        figure.appendChild(logo)
+
+
+        step.addEventListener("change", e => {
+            bgn.step = e.target.value
+            eur.step = e.target.value
+        })
+
+        const current_time = () => {
+            const now = new Date();
+            return `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`
+        }
+
+        function clock(){
+            time_element.innerText =  current_time()
+            setTimeout(()=>{
+                clock()
+            },1000)
+        }
+
+        window.addEventListener("load",clock)
 
         const round = (num) => parseFloat(num).toFixed(2)
 
