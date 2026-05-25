@@ -7,7 +7,7 @@
         html{
             font-size: 16px;
             line-height: 3.5em;
-            color: #891515;
+            color: rgb(12,5,5,0.8);
             font-weight: 800;
             text-shadow: 0.1em 0.1em 0.16em rgba(182, 21, 21, 0.66);
         }
@@ -33,7 +33,7 @@
             width: 100%;
             height: 100%;
             text-align: center;
-         }
+        }
 
         .logo div{
             padding-left: 11vw;
@@ -43,7 +43,8 @@
             position: absolute;
             top: 10vh;
             font-size: 7rem;
-            color: rgba(232, 70, 48, 0.5);
+            color: rgba(252, 27, 28, 0.5);
+            text-shadow: 0.01em 0.01em 0.02em rgba(22, 2, 8, 0.66);
         }
 
 
@@ -62,16 +63,51 @@
             top: 30vh;
             min-height: 50vh;
             max-width: 23vw;
-            background: linear-gradient( to bottom,rgb(256,256,256,0.4), rgba(53, 185, 8, 0.4), rgba(248, 7, 7, 0.4));
+            backdrop-filter: blur(10px);
+
+        }
+
+        #display::before{
+            content: '';
+            position: relative;
+            will-change: transform;
+            width: 200%; height: 200%;
+            top: -100%; left: -100%;
+            background: linear-gradient( to bottom,rgb(256,256,256,0.9),rgb(256,256,256,0.9), rgba(53, 185, 8, 0.4), rgba(248, 7, 7, 0.4));
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease-in-out infinite;
         }
 
         .bg {
-            background: linear-gradient( to bottom,rgb(256,256,256,0.4), rgba(53, 185, 8, 0.4), rgba(248, 7, 7, 0.4)) !important;
+            background: linear-gradient( 90deg,rgb(256,256,256,0.57),rgba(53, 185, 8, 0.57), rgba(248, 7, 7, 0.57));
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease infinite;
+        }
+        .bg::before{
+            content: '';
+            position: relative;
+            will-change: transform;
+            width: 400%; height: 400%;
+            top: -100%; left: -100%;
+            background: linear-gradient( to bottom,rgb(256,256,256,0.57),rgba(53, 185, 8, 0.57), rgba(248, 7, 7, 0.57));
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease infinite;
         }
 
         .eu {
-            background: linear-gradient( to bottom, rgba(6, 19, 111, 0.3), rgb(6, 19, 111, 0.17), rgba(6, 19, 111, 0.3)) !important;
-
+            background: linear-gradient( 90deg, rgba(6, 19, 111, 0.8), rgb(255, 255, 51, 0.45), rgba(6, 19, 111, 0.8));
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease-in-out infinite;
+        }
+        .eu::before{
+            content: '';
+            position: relative;
+            will-change: transform;
+            width: 200%; height: 200%;
+            top: -100%; left: -100%;
+            background: linear-gradient( 45deg, rgba(6, 19, 111, 0.3), rgb(6, 19, 111, 0.17), rgba(6, 19, 111, 0.3));
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease-in-out infinite;
         }
 
         [id^="result"]{
@@ -80,13 +116,13 @@
             max-height: 90vh;
             border-radius: 0.45em 0.55em 0.2em 0.3em;
             box-shadow: 0.2em 0.3em 0.1em #0d301f;
-            background-color: rgba(241, 18, 18, 0.11);
+            background-color: rgba(241, 18, 18, 0.04);
             overflow-y: scroll;
         }
 
         form > div:last-child > div:last-child{
             box-shadow: -0.2em 0.3em 0.1em #0d301f;
-            background-color: rgba(18, 96, 241, 0.11);
+            background-color: rgba(18, 96, 241, 0.04);
 
         }
 
@@ -153,15 +189,18 @@
             min-height: 1rem;
             background-color: rgba(241, 202, 8, 0.62);
             border-radius: 0.5em;
+            box-shadow: 0.02em 0.03em 0.01em #0d301f;
         }
 
         .source{
-            color: #e68709;
+            color: rgb(251,25,25,0.7);
             font-size: 0.8em;
+            text-shadow: 0.01em 0.01em 0.04em #0d301f;
         }
 
         .result{
-            color: #08a40a;
+            color: rgb(32,200,12,0.7);
+            text-shadow: 0.02em 0.02em 0.03em #0d301f;
         }
 
         div.settings{
@@ -181,6 +220,164 @@
             border-radius: 0.2em 0.2em 1.8em 1.8em;
         }
 
+        .animated-gradient {
+            /* 1. Дефинирайте цветовете и ъгъла */
+            background: linear-gradient(-45deg,
+            #11dd11,
+            #dd1111,
+            #ffffff,
+            #ffffff
+            );
+
+            /* 2. Увеличете размера, за да има накъде да се движи */
+            background-size: 400% 400%;
+
+            /* 3. Стартирайте анимацията */
+            animation: gradient-shift 15s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0%,50%; }
+            50% { background-position: 100%,50%; }
+            100% { background-position: 0%,50%; }
+        }
+
+        @media (max-width : 900px){
+
+            body{
+                height: 100%;
+                width:100%;
+                font-size: 0.88rem;
+            }
+
+            time{
+                font-size: 1.78rem;
+                top: 25%;
+            }
+
+            form{
+                gap: 15%;
+            }
+
+            form div{
+                width: 40%;
+            }
+
+            input{
+                width: 90%;
+            }
+
+            #display{
+                font-size: 1em;
+                border-radius: 0.6em;
+                font-weight: 900;
+                /*display: flex;*/
+                flex-direction: column;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
+                justify-items: center;
+                border: solid 2px #891515;
+                position: absolute;
+                top: 55%;
+                min-height: 20vh;
+                width: 100%;
+                line-height: 0.5em;
+            }
+
+            .settings{
+                align-content: center;
+                left: 45%;
+                align-items: center;
+                max-width: 70%;
+                bottom: 1%;
+                top: 70vh;
+                position: absolute;
+                padding: 0px;
+                margin: 0px;
+                gap: 1px;
+                padding-top: 2.5em;
+            }
+
+            .settings > *{
+                line-height: 1.5em;
+                display: inline;
+                position: relative;
+                overflow: visible;
+                align-content: center;
+                width: 50vw;
+                padding: 0px;
+                margin: 0px;
+            }
+
+            .settings input{
+                min-width: 20vw;
+            }
+
+            [id^="result"]{
+                max-width: 100%;
+                width: 90%;
+                min-height: 40vh;
+                font-size: 1em;
+                line-height: 1.5em;
+            }
+
+            [id^="result"] > div{
+                width: 100%;
+            }
+
+            .logo{
+                top: 3%;
+                left: 34%;
+                position: absolute;
+            }
+
+            hr{
+                min-height: 0.5rem;
+                padding: 0;
+                margin:0;
+            }
+
+
+        }
+
+        @media (max-width: 460px) and (min-height: 600px){
+            body{
+                font-size: 0.68rem;
+
+            }
+
+            #display{
+                top:25%;
+                min-width: 30%;
+                padding: 0;
+                margin: 0;
+            }
+
+            [id^="result"]{
+                min-height: 70vh;
+            }
+
+            .settings{
+                top: 85vh;
+            }
+
+            .logo{
+                min-width: 15%;
+                left: 28%;
+            }
+
+            time{
+                top: 10%;
+            }
+
+            hr {
+                margin: 0.4em;
+
+            }
+
+        }
+
 
     </style>
 </head>
@@ -190,7 +387,7 @@
             <div>
                 <label for="bgn">Сума в левове</label>
                 <input type="number" placeholder="лева" id="bgn"></input>
-                <div id="result-bgn" class="bg"></div>
+                <div id="result-bgn" class=""></div>
             </div>
             <time></time>
             <figure class="logo"></figure>
@@ -202,7 +399,7 @@
             <div>
                 <label for="eur">Сума в евро</label>
                 <input type="number" placeholder="евро" id="eur"></input>
-                <div id="result-eur" class="eu"></div>
+                <div id="result-eur" class=""></div>
             </div>
         </form>
 
@@ -225,6 +422,7 @@
         const source = document.querySelector(".source")
         const result = document.querySelector(".result")
         const display = document.querySelector("#display")
+        const displayHr = document.querySelector("#display hr")
         const step = document.querySelector("#step")
         const time_element = document.querySelector("time")
         const [resultBgn,resultEur] = document.querySelectorAll("[id^='result']")
@@ -274,8 +472,8 @@
         bgn.addEventListener("input", (e) => {
             source.innerHTML = `${e.target.value}лв.`
             result.innerHTML = `${round(e.target.value / currency_rate)}€`
-            display.classList.remove("eu")
-            display.classList.add('bg')
+            displayHr.classList.remove("eu")
+            displayHr.classList.add('bg')
             currentBgnEl.innerText = `${e.target.value}лв. = ${round(e.target.value / currency_rate)}€ `
             resultEur.appendChild(element)
 
@@ -284,8 +482,8 @@
         eur.addEventListener("input", (e) => {
             source.innerHTML = `${e.target.value}€`
             result.innerHTML = `${round(e.target.value * currency_rate)}лв.`
-            display.classList.remove("bg")
-            display.classList.add('eu')
+            displayHr.classList.remove("bg")
+            displayHr.classList.add('eu')
             currentEurEl.innerText = `${e.target.value}€ = ${round(e.target.value * currency_rate)}лв.`
             resultEur.appendChild(element)
         })
@@ -295,8 +493,8 @@
             currentBgnEl.dataset.source = `${e.target.value}лв.`
             currentBgnEl.dataset.result = `${round(e.target.value / currency_rate)}€`
             currentBgnEl.addEventListener("click", (e)=>{
-                display.classList.remove("eu")
-                display.classList.add('bg')
+                displayHr.classList.remove("eu")
+                displayHr.classList.add('bg')
                 source.innerText = e.target.dataset.source
                 result.innerText = e.target.dataset.result
             })
@@ -309,8 +507,8 @@
             currentEurEl.dataset.source = `${e.target.value}€`
             currentEurEl.dataset.result = `${round(e.target.value * currency_rate)}лв.`
             currentEurEl.addEventListener("click", (e)=>{
-                display.classList.remove("bg")
-                display.classList.add('eu')
+                displayHr.classList.remove("bg")
+                displayHr.classList.add('eu')
                 source.innerText = e.target.dataset.source
                 result.innerText = e.target.dataset.result
             })
