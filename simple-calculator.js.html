@@ -386,7 +386,7 @@
         <form>
             <div>
                 <label for="bgn">Сума в левове</label>
-                <button class="decrease-btn" onclick="(e)=>decrease(e,'#bgn')">-</button><input type="number" placeholder="лева" id="bgn"/><button class="increase-btn" onclick="(e)=>increase(e,'#bgn')">+</button>
+                <button class="decrease-btn" onclick="decrease(event,'#bgn')">-</button><input type="number" placeholder="лева" id="bgn"/><button class="increase-btn" onclick="increase(event,'#bgn')">+</button>
                 <div id="result-bgn" class=""></div>
             </div>
             <time></time>
@@ -398,7 +398,7 @@
             </div>
             <div>
                 <label for="eur">Сума в евро</label>
-                <button class="decrease-btn" onclick="(e)=>decrease(e,'#eur')">-</button><input type="number" placeholder="евро" id="eur"/><button class="increase-btn" onclick="(e)=>increase(e,'#eur')">+</button>
+                <button class="decrease-btn" onclick="decrease(event,'#eur')">-</button><input type="number" placeholder="евро" id="eur"/><button class="increase-btn" onclick="increase(event,'#eur')">+</button>
                 <div id="result-eur" class=""></div>
             </div>
         </form>
@@ -464,12 +464,20 @@
             e.preventDefault()
             const inp = document.querySelector(`${className}`)
             inp.value = parseFloat(inp.value) + parseFloat(step.value)
+            const einp = new Event("input",{bubbles: true})
+            const echng = new Event("change",{bubbles: true})
+            inp.dispatchEvent(einp)
+            inp.dispatchEvent(echng)
         }
 
         function decrease(e,className){
             e.preventDefault()
             const inp = document.querySelector(`${className}`)
             inp.value = parseFloat(inp.value) - parseFloat(step.value)
+            const einp = new Event("input",{bubbles: true})
+            const echng = new Event("change",{bubbles: true})
+            inp.dispatchEvent(einp)
+            inp.dispatchEvent(echng)
         }
 
         const form = document.querySelector("main form")
