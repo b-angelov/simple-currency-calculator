@@ -461,14 +461,19 @@
         }
 
         function increase(e,className){
+            e.preventDefault()
             const inp = document.querySelector(`${className}`)
             inp.value = parseFloat(inp.value) + parseFloat(step.value)
         }
 
         function decrease(e,className){
+            e.preventDefault()
             const inp = document.querySelector(`${className}`)
             inp.value = parseFloat(inp.value) - parseFloat(step.value)
         }
+
+        const form = document.querySelector("main form")
+        form.addEventListener("submit",(e)=>e.preventDefault())
 
         window.addEventListener("load",clock)
 
@@ -481,31 +486,35 @@
 
         bgn.addEventListener("input", (e) => {
             e.preventDefault()
+            e.stopPropagation()
             source.innerHTML = `${e.target.value}лв.`
             result.innerHTML = `${round(e.target.value / currency_rate)}€`
             displayHr.classList.remove("eu")
             displayHr.classList.add('bg')
             currentBgnEl.innerText = `${e.target.value}лв. = ${round(e.target.value / currency_rate)}€ `
-            resultEur.appendChild(element)
+            resultEur.appendChild(e)
 
         })
 
         eur.addEventListener("input", (e) => {
             e.preventDefault()
+            e.stopPropagation()
             source.innerHTML = `${e.target.value}€`
             result.innerHTML = `${round(e.target.value * currency_rate)}лв.`
             displayHr.classList.remove("bg")
             displayHr.classList.add('eu')
             currentEurEl.innerText = `${e.target.value}€ = ${round(e.target.value * currency_rate)}лв.`
-            resultEur.appendChild(element)
+            resultEur.appendChild(e)
         })
 
         bgn.addEventListener("change", (e) => {
             e.preventDefault()
+            e.stopPropagation()
             currentBgnEl.style.cursor = "pointer"
             currentBgnEl.dataset.source = `${e.target.value}лв.`
             currentBgnEl.dataset.result = `${round(e.target.value / currency_rate)}€`
             currentBgnEl.addEventListener("click", (e)=>{
+                e.preventDefault()
                 displayHr.classList.remove("eu")
                 displayHr.classList.add('bg')
                 source.innerText = e.target.dataset.source
@@ -517,10 +526,12 @@
 
         eur.addEventListener("change", (e) => {
             e.preventDefault()
+            e.stopPropagation()
             currentEurEl.style.cursor = "pointer"
             currentEurEl.dataset.source = `${e.target.value}€`
             currentEurEl.dataset.result = `${round(e.target.value * currency_rate)}лв.`
             currentEurEl.addEventListener("click", (e)=>{
+                e.preventDefault()
                 displayHr.classList.remove("bg")
                 displayHr.classList.add('eu')
                 source.innerText = e.target.dataset.source
@@ -532,6 +543,7 @@
 
         eur.addEventListener("keyup", (e)=>{
             e.preventDefault()
+            e.stopPropagation()
             if (e.key === "Enter") {
                 eur.value=""
             }
@@ -539,6 +551,7 @@
 
         bgn.addEventListener("keyup", (e)=>{
             e.preventDefault()
+            e.stopPropagation()
             if (e.key === "Enter") {
                 bgn.value=""
             }
