@@ -21,9 +21,14 @@
             background-color: rgba(174, 234, 178, 0.11);
         }
 
+        html, body{
+            margin: 0;
+            overflow-x: hidden;
+        }
+
         .logo{
             left: 37vw;
-            top: 6vh;
+            top: 3vh;
             font-size: 8rem;
             /*font-family: 'Noto Color Emoji', sans-serif;*/
             position: absolute;
@@ -46,8 +51,8 @@
 
         time{
             position: absolute;
-            top: 5vh;
-            font-size: 7rem;
+            top: 3vh;
+            font-size: 4rem;
             color: rgba(252, 27, 28, 0.5);
             text-shadow: 0.01em 0.01em 0.02em rgba(22, 2, 8, 0.66);
         }
@@ -65,7 +70,7 @@
             justify-items: center;
             border: solid 2px #891515;
             position: absolute;
-            top: 15vh;
+            top: 25vh;
             min-height: 50vh;
             max-width: 23vw;
             backdrop-filter: blur(10px);
@@ -209,7 +214,7 @@
         }
 
         div.settings{
-            position: absolute;
+            position: fixed;
             display:flex;
             align-items: center;
             align-content: center;
@@ -218,6 +223,12 @@
             bottom: 2vh;
             max-width: 20vw;
 
+        }
+
+        .settings label{
+            display: inline;
+            width: 130%;
+            position: relative;
         }
 
         div.settings input{
@@ -392,7 +403,7 @@
             }
 
             .settings label{
-                padding-left: 120%;
+                padding-left: 5%;
             }
 
             [id^="result"]{
@@ -444,7 +455,9 @@
                 bottom:5px!important;
             }
             .settings label{
-                padding-left: 35%;
+                padding-left: 135%;
+                width: 120%;
+                min-width: 300px;
             }
 
             .logo{
