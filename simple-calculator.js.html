@@ -242,6 +242,47 @@
             100% { background-position: 0%,50%; }
         }
 
+        .input-container{
+            position: absolute;
+            display: flex;
+            gap:0.5rem;
+            flex-direction: row;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .input-container button{
+            padding: .2em .4em;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            font-weight: 700;
+            color: rgb(48, 48, 48, 0.7);
+            text-shadow: 0.05em 0.05em 0.06em #575a59;
+            border: 2px solid rgb(248, 248, 248);
+        }
+
+        .input-container .increase-btn{
+            background-color: #09b809;
+        }
+
+        .input-container .decrease-btn{
+            background-color: #f43613;
+        }
+
+        .input-container .left-art{
+            border-radius: 1% 1% 30% 1%;
+            corner-shape: scoop;
+        }
+
+        .input-container .right-art{}
+
+        .input-container .left-rev{
+
+            /* This cuts out a 30px inward curve from the top-left corner across ALL browsers */
+            -webkit-mask-image: radial-gradient(circle at 0 0, transparent 30px, black 31px);
+            mask-image: radial-gradient(circle at 0 0, transparent 30px, black 31px);
+        }
+
         @media (max-width : 900px){
 
             body{
@@ -386,7 +427,7 @@
         <form>
             <div>
                 <label for="bgn">Сума в левове</label>
-                <button class="decrease-btn" onclick="decrease(event,'#bgn')">-</button><input type="number" placeholder="лева" id="bgn"/><button class="increase-btn" onclick="increase(event,'#bgn')">+</button>
+                <div class="input-container"><button class="decrease-btn left-art" onclick="decrease(event,'#bgn')">-</button><input type="number" placeholder="лева" id="bgn"/><button class="increase-btn right-art" onclick="increase(event,'#bgn')">+</button></div>
                 <div id="result-bgn" class=""></div>
             </div>
             <time></time>
@@ -398,7 +439,7 @@
             </div>
             <div>
                 <label for="eur">Сума в евро</label>
-                <button class="decrease-btn" onclick="decrease(event,'#eur')">-</button><input type="number" placeholder="евро" id="eur"/><button class="increase-btn" onclick="increase(event,'#eur')">+</button>
+                <div class="input-container"><button class="decrease-btn right-art" onclick="decrease(event,'#eur')">-</button><input type="number" placeholder="евро" id="eur"/><button class="increase-btn left-rev" onclick="increase(event,'#eur')">+</button></div>
                 <div id="result-eur" class=""></div>
             </div>
         </form>
@@ -426,8 +467,6 @@
         const step = document.querySelector("#step")
         const time_element = document.querySelector("time")
         const [resultBgn,resultEur] = document.querySelectorAll("[id^='result']")
-        console.log(document.querySelectorAll("[id^='result']"))
-        console.log(resultBgn,resultEur)
         const currency_rate = 1.95583
 
         const figure = document.querySelector(".logo")
@@ -500,7 +539,7 @@
             displayHr.classList.remove("eu")
             displayHr.classList.add('bg')
             currentBgnEl.innerText = `${e.target.value}лв. = ${round(e.target.value / currency_rate)}€ `
-            resultEur.appendChild(e)
+            // resultEur.appendChild(e)
 
         })
 
@@ -512,7 +551,7 @@
             displayHr.classList.remove("bg")
             displayHr.classList.add('eu')
             currentEurEl.innerText = `${e.target.value}€ = ${round(e.target.value * currency_rate)}лв.`
-            resultEur.appendChild(e)
+            // resultEur.appendChild(e)
         })
 
         bgn.addEventListener("change", (e) => {
