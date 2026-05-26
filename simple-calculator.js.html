@@ -458,7 +458,7 @@
         <form>
             <div>
                 <label for="bgn">Сума в левове</label>
-                <div class="input-container"><button class="decrease-btn left-art" onclick="decrease(event,'#bgn')">-</button><input type="number" placeholder="лева" id="bgn"/><button class="increase-btn right-art" onclick="increase(event,'#bgn')">+</button></div>
+                <div class="input-container"><button type="button" class="decrease-btn left-art" onclick="decrease(event,'#bgn')">-</button><input type="number" placeholder="лева" id="bgn"/><button type="button" class="increase-btn right-art" onclick="increase(event,'#bgn')">+</button></div>
                 <div id="result-bgn" class=""></div>
             </div>
             <time></time>
@@ -470,7 +470,7 @@
             </div>
             <div>
                 <label for="eur">Сума в евро</label>
-                <div class="input-container"><button class="decrease-btn left-art" onclick="decrease(event,'#eur')">-</button><input type="number" placeholder="евро" id="eur"/><button class="increase-btn left-rev" onclick="increase(event,'#eur')">+</button></div>
+                <div class="input-container"><button type="button" class="decrease-btn left-art" onclick="decrease(event,'#eur')">-</button><input type="number" placeholder="евро" id="eur"/><button type="button" class="increase-btn left-rev" onclick="increase(event,'#eur')">+</button></div>
                 <div id="result-eur" class=""></div>
             </div>
         </form>
@@ -533,6 +533,7 @@
         function increase(e,className){
             e.preventDefault()
             e.stopPropagation()
+            console.log("ïncr")
             const inp = document.querySelector(`${className}`)
             inp.value = (parseFloat(inp.value) + parseFloat(step.value)) || INCREMENT_STEP
             const einp = new Event("input",{bubbles: true})
@@ -544,6 +545,7 @@
         function decrease(e,className){
             e.preventDefault()
             e.stopPropagation()
+            console.log("decr",className)
             const inp = document.querySelector(`${className}`)
             inp.value = (parseFloat(inp.value) - parseFloat(step.value)) || INCREMENT_STEP
             const einp = new Event("input",{bubbles: true})
@@ -572,7 +574,7 @@
             displayHr.classList.remove("eu")
             displayHr.classList.add('bg')
             currentBgnEl.innerText = `${e.target.value}лв. = ${round((e.target.value || 0) / currency_rate)}€ `
-            resultEur.appendChild(e)
+            // resultEur.appendChild(e)
 
         })
 
@@ -584,7 +586,7 @@
             displayHr.classList.remove("bg")
             displayHr.classList.add('eu')
             currentEurEl.innerText = `${e.target.value}€ = ${round((e.target.value || 0) * currency_rate)}лв.`
-            resultEur.appendChild(e)
+            // resultEur.appendChild(e)
         })
 
         bgn.addEventListener("change", (e) => {
@@ -595,6 +597,7 @@
             currentBgnEl.dataset.result = `${round((e.target.value || 0) / currency_rate)}€`
             currentBgnEl.addEventListener("click", (e)=>{
                 e.preventDefault()
+                e.stopPropagation()
                 displayHr.classList.remove("eu")
                 displayHr.classList.add('bg')
                 source.innerText = e.target.dataset.source
@@ -612,6 +615,7 @@
             currentEurEl.dataset.result = `${round((e.target.value || 0) * currency_rate)}лв.`
             currentEurEl.addEventListener("click", (e)=>{
                 e.preventDefault()
+                e.stopPropagation()
                 displayHr.classList.remove("bg")
                 displayHr.classList.add('eu')
                 source.innerText = e.target.dataset.source
